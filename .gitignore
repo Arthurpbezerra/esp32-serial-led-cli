@@ -1,0 +1,16 @@
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+libdeps/
+
+# VS Code
+.vscode/.browse.vc.db
+.vscode/.cmake.api/
+.vscode/.sconsign.dblite
+.vscode/ipch/
+.vscode/prio.db
+
+# Sistema
+.DS_Store
+Thumbs.db
