@@ -3,9 +3,8 @@
 #define LED_RED 2
 #define LED_BLUE 4
 
-String inputBuffer = "";
-String destino = "";
-String processInput(String s);
+
+void processInput(char* s);
 
 void setup() {
   // put your setup code here, to run once:
@@ -17,42 +16,52 @@ void setup() {
 }
 
 void loop() {
-  
+  static char buffer[32];
+  static int pos = 0;
     while(Serial.available() > 0) {
       char c = Serial.read();
-      c = tolower(c);
-      if(c =='\r' || c == '\n') {
-        if(inputBuffer.length() > 0) {
-          destino = processInput(inputBuffer);
 
-          inputBuffer = "";
+      if(c =='\r' || c == '\n') {
+        if(pos > 0) {
+          buffer[pos] = '\0'; 
+          processInput(buffer);
+
+          pos = 0;
         }
       }
-      else {
-        inputBuffer += c;
+      else if (pos <sizeof(buffer) - 1) {
+        buffer[pos] = tolower(c);
+        pos++;
       }
       
     }
 
-    if (destino == "blue on") {
-      digitalWrite(LED_BLUE, HIGH);
-    }
-    else if(destino == "blue off") {
-      digitalWrite(LED_BLUE, LOW);
-    }
-    else if(destino == "red on") {
-      digitalWrite(LED_RED, HIGH);
-    }
-    else if(destino == "red off") {
-      digitalWrite(LED_RED, LOW);
-    }
-   
-
-    destino = "";
 
 }
-String processInput(String s){
-  s.trim();
-  Serial.println("Received input: " + s);
-  return s;
+void processInput(char* s){
+  char* device = strtok(s, " ");
+  char* action = strtok(NULL, " ");
+  int pin = -1;
+  if (strcmp(device, "blue") == 0) {
+    pin = LED_BLUE;
+  } else if (strcmp(device, "red") == 0) {
+    pin = LED_RED;
+  } 
+  if (pin != -1) {
+    if(strcmp(action,"on") == 0){
+      digitalWrite(pin,HIGH);
+      Serial.printf("Led %s ligada\r\n",device);
+    }
+    else if(strcmp(action,"off") == 0){
+      digitalWrite(pin,LOW);
+      Serial.printf("Led %s desligada\r\n",device);
+    }
+    else {
+      Serial.println("Action nao reconhecida");
+    }
+  }
+  else {
+      Serial.println("Dispositivo nao reconhecido");
+    }
+  
 }
