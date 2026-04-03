@@ -8,8 +8,8 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "C:/Users/arthu/Documents/Estudo e Projetos Pessoais/Embarcados/Teste/include",
-                "C:/Users/arthu/Documents/Estudo e Projetos Pessoais/Embarcados/Teste/src",
+                "C:/Users/arthu/Documents/Estudo e Projetos Pessoais/Embarcados/Serial_Led/include",
+                "C:/Users/arthu/Documents/Estudo e Projetos Pessoais/Embarcados/Serial_Led/src",
                 "C:/Users/arthu/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "C:/Users/arthu/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                 "C:/Users/arthu/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -244,8 +244,8 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "C:/Users/arthu/Documents/Estudo e Projetos Pessoais/Embarcados/Teste/include",
-                    "C:/Users/arthu/Documents/Estudo e Projetos Pessoais/Embarcados/Teste/src",
+                    "C:/Users/arthu/Documents/Estudo e Projetos Pessoais/Embarcados/Serial_Led/include",
+                    "C:/Users/arthu/Documents/Estudo e Projetos Pessoais/Embarcados/Serial_Led/src",
                     "C:/Users/arthu/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "C:/Users/arthu/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                     "C:/Users/arthu/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",

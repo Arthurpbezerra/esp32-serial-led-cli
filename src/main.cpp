@@ -46,6 +46,10 @@ void processInput(char* s){
     pin = LED_BLUE;
   } else if (strcmp(device, "red") == 0) {
     pin = LED_RED;
+  }
+  else if (strcmp(device, "status") == 0){
+    Serial.printf("Status atual:\r\nLed 1: %s\r\nLed 2: %s\r\n",digitalRead(LED_RED)? "ON":"OFF",digitalRead(LED_BLUE)? "ON":"OFF");
+    return;
   } 
   if (pin != -1) {
     if(strcmp(action,"on") == 0){
