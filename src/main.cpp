@@ -1,10 +1,9 @@
 #include <Arduino.h>
+#include "app/app_state.h"
+#include "cli/cli.h"
+#include "app/pins.h"
 
-#define LED_RED 2
-#define LED_BLUE 4
-
-
-void processInput(char* s);
+static AppState appState;
 
 void setup() {
   // put your setup code here, to run once:
@@ -13,59 +12,9 @@ void setup() {
   pinMode(LED_BLUE, OUTPUT);
   delay(1000); // Wait for Serial to initialize
   Serial.setTimeout(10000);
+  appState.bootMs = millis();
 }
 
 void loop() {
-  static char buffer[32];
-  static int pos = 0;
-    while(Serial.available() > 0) {
-      char c = Serial.read();
-
-      if(c =='\r' || c == '\n') {
-        if(pos > 0) {
-          buffer[pos] = '\0'; 
-          processInput(buffer);
-
-          pos = 0;
-        }
-      }
-      else if (pos <sizeof(buffer) - 1) {
-        buffer[pos] = tolower(c);
-        pos++;
-      }
-      
-    }
-
-
-}
-void processInput(char* s){
-  char* device = strtok(s, " ");
-  char* action = strtok(NULL, " ");
-  int pin = -1;
-  if (strcmp(device, "blue") == 0) {
-    pin = LED_BLUE;
-  } else if (strcmp(device, "red") == 0) {
-    pin = LED_RED;
-  }
-  else if (strcmp(device, "status") == 0){
-    Serial.printf("Status atual:\r\nLed 1: %s\r\nLed 2: %s\r\n",digitalRead(LED_RED)? "ON":"OFF",digitalRead(LED_BLUE)? "ON":"OFF");
-    return;
-  } 
-  if (pin != -1) {
-    if(strcmp(action,"on") == 0){
-      digitalWrite(pin,HIGH);
-      Serial.printf("Led %s ligada\r\n",device);
-    }
-    else if(strcmp(action,"off") == 0){
-      digitalWrite(pin,LOW);
-      Serial.printf("Led %s desligada\r\n",device);
-    }
-    else {
-      Serial.println("Action nao reconhecida");
-    }
-  }
-  else {
-      Serial.println("Dispositivo nao reconhecido");
-    }
-  
+  cliPoll(appState);
 }
