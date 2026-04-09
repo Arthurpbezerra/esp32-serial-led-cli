@@ -14,6 +14,22 @@ void executeCommand(char* line, AppState& app) {
   if(device == nullptr){
     return;
   }
+  if(strcmp(device,"help") == 0){
+    Serial.println("Comandos:");
+    Serial.println("  help              lista esta ajuda");
+    Serial.println("  uptime            Mostra tempo desde boot");
+    Serial.println("  status            estado dos LEDs (red/blue)");
+    Serial.println("  red on|off        controla LED vermelho");
+    Serial.println("  blue on|off       controla LED azul");
+    return;
+  }
+  if(strcmp(device,"uptime") == 0){
+    uint32_t now = millis();
+
+    Serial.printf("Uptime: %lu",(now - app.bootMs)/1000);
+    return;
+  }
+
   if (strcmp(device, "status") == 0) {
     Serial.printf("Status atual:\r\nLed 1: %s\r\nLed 2: %s\r\n", app.redOn ? "ON" : "OFF", app.blueOn ? "ON" : "OFF");
     return;
