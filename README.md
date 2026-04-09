@@ -58,10 +58,3 @@ Controlar LEDs por comandos via Serial, com parser de linha não bloqueante e se
 4. Abra o Serial Monitor em `115200`.
 5. Envie os comandos listados acima.
 
-## Próximos passos sugeridos
-
-- Padronizar respostas (`OK`, `ERR`, `USAGE`)
-- Tratar overflow de linha no parser da CLI
-- Adicionar sintaxe alternativa:
-  - `set led <red|blue> <on|off>`
-  - `get uptime`
